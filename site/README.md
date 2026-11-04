@@ -4,6 +4,12 @@
 
 DaylyTrack uses its own email OTP accounts and D1 sessions for `/api/auth` and `/api/data`. No ChatGPT account is required.
 
+## Local stage 3 preview
+
+`npm run dev -- --hostname 127.0.0.1` enables a fixed local demo account on loopback only. It creates that account in the local D1 database on the first `/api/data` request and keeps its networks and tasks across preview restarts. This preview bypasses email verification only while Vite serves locally; production builds do not receive the demo binding. Apply the local D1 migrations below before using it. The stage 3 interface can create networks, set the default network, switch networks, and create name-only tasks. The selected network stays in the current tab across reloads; a new tab starts at the default network. Card editing and gestures belong to later stages.
+
+Run `npm run test:view` to check todo ordering, status tones, and network counts.
+
 Apply `drizzle/0000_marvelous_leo.sql`, `drizzle/0001_wise_amphibian.sql`, and `drizzle/0002_slim_magneto.sql` in order to a fresh local D1 database. Existing local databases need each migration they have not already applied. Run `npm run test:data` for isolated D1 tests.
 
 Email sending uses Brevo's transactional API. Configure `BREVO_API_KEY`, `BREVO_SENDER_EMAIL`, and a random `AUTH_PEPPER` of at least 32 characters as Worker secrets or local development variables; `BREVO_SENDER_NAME` is optional. Without these secrets and an activated sender, requesting a code returns 503. No credentials or sender address are committed. Sender activation, deliverability, and Sites compatibility remain unverified.

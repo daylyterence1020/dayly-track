@@ -2,10 +2,13 @@ import { env } from "cloudflare:workers";
 import { createAuthStore } from "../../../db/auth";
 import { createDaylyTrackStore, DataError } from "../../../db/dayly-track";
 import { getDb } from "../../../db";
+import { localDemoAccount } from "../../../db/local-demo";
 
 export const dynamic = "force-dynamic";
 
 async function account(request: Request) {
+  const demo = await localDemoAccount(request);
+  if (demo) return demo;
   const token = request.headers.get("cookie")?.split(";").map((part) => part.trim())
     .find((part) => part.startsWith("dayly_session="))?.slice("dayly_session=".length) ?? null;
   if (!env.DB) return null;

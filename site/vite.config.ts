@@ -61,6 +61,7 @@ export default defineConfig(async ({ command }) => {
         inspectorPort: false,
         config: {
           ...localBindingConfig,
+          ...(command === "serve" ? { vars: { DAYLY_LOCAL_DEMO: "1" } } : {}),
           ...(command === "serve"
             ? {
                 services: [
