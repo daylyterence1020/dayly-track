@@ -1,0 +1,434 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "d22ef353-d57e-4d61-8e79-c8e7b1bb3e4b",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "network_people": {
+      "name": "network_people",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "network_id": {
+          "name": "network_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "person_id": {
+          "name": "person_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "network_people_owner_person": {
+          "name": "network_people_owner_person",
+          "columns": [
+            "owner_id",
+            "person_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "network_people_owner_id_network_id_networks_owner_id_id_fk": {
+          "name": "network_people_owner_id_network_id_networks_owner_id_id_fk",
+          "tableFrom": "network_people",
+          "tableTo": "networks",
+          "columnsFrom": [
+            "owner_id",
+            "network_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "network_people_owner_id_person_id_people_owner_id_id_fk": {
+          "name": "network_people_owner_id_person_id_people_owner_id_id_fk",
+          "tableFrom": "network_people",
+          "tableTo": "people",
+          "columnsFrom": [
+            "owner_id",
+            "person_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "network_people_owner_id_network_id_person_id_pk": {
+          "columns": [
+            "owner_id",
+            "network_id",
+            "person_id"
+          ],
+          "name": "network_people_owner_id_network_id_person_id_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "networks": {
+      "name": "networks",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "networks_owner_id_id": {
+          "name": "networks_owner_id_id",
+          "columns": [
+            "owner_id",
+            "id"
+          ],
+          "isUnique": true
+        },
+        "networks_owner_id": {
+          "name": "networks_owner_id",
+          "columns": [
+            "owner_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "networks_name_nonempty": {
+          "name": "networks_name_nonempty",
+          "value": "length(trim(\"networks\".\"name\")) > 0"
+        }
+      }
+    },
+    "people": {
+      "name": "people",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "people_owner_id_id": {
+          "name": "people_owner_id_id",
+          "columns": [
+            "owner_id",
+            "id"
+          ],
+          "isUnique": true
+        },
+        "people_owner_id": {
+          "name": "people_owner_id",
+          "columns": [
+            "owner_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "people_name_nonempty": {
+          "name": "people_name_nonempty",
+          "value": "length(trim(\"people\".\"name\")) > 0"
+        }
+      }
+    },
+    "tasks": {
+      "name": "tasks",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "network_id": {
+          "name": "network_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "due_at": {
+          "name": "due_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "from_person_id": {
+          "name": "from_person_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "to_person_id": {
+          "name": "to_person_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'in_progress'"
+        },
+        "placement": {
+          "name": "placement",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'todo'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "tasks_owner_id_id": {
+          "name": "tasks_owner_id_id",
+          "columns": [
+            "owner_id",
+            "id"
+          ],
+          "isUnique": true
+        },
+        "tasks_owner_network_placement": {
+          "name": "tasks_owner_network_placement",
+          "columns": [
+            "owner_id",
+            "network_id",
+            "placement"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "tasks_owner_id_network_id_networks_owner_id_id_fk": {
+          "name": "tasks_owner_id_network_id_networks_owner_id_id_fk",
+          "tableFrom": "tasks",
+          "tableTo": "networks",
+          "columnsFrom": [
+            "owner_id",
+            "network_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "tasks_owner_id_from_person_id_people_owner_id_id_fk": {
+          "name": "tasks_owner_id_from_person_id_people_owner_id_id_fk",
+          "tableFrom": "tasks",
+          "tableTo": "people",
+          "columnsFrom": [
+            "owner_id",
+            "from_person_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "tasks_owner_id_to_person_id_people_owner_id_id_fk": {
+          "name": "tasks_owner_id_to_person_id_people_owner_id_id_fk",
+          "tableFrom": "tasks",
+          "tableTo": "people",
+          "columnsFrom": [
+            "owner_id",
+            "to_person_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "tasks_title_nonempty": {
+          "name": "tasks_title_nonempty",
+          "value": "length(trim(\"tasks\".\"title\")) > 0"
+        },
+        "tasks_due_whole_hour": {
+          "name": "tasks_due_whole_hour",
+          "value": "\"tasks\".\"due_at\" IS NULL OR \"tasks\".\"due_at\" % 3600 = 0"
+        },
+        "tasks_distinct_people": {
+          "name": "tasks_distinct_people",
+          "value": "\"tasks\".\"from_person_id\" IS NULL OR \"tasks\".\"to_person_id\" IS NULL OR \"tasks\".\"from_person_id\" <> \"tasks\".\"to_person_id\""
+        },
+        "tasks_valid_status": {
+          "name": "tasks_valid_status",
+          "value": "\"tasks\".\"status\" IN ('in_progress', 'completed')"
+        },
+        "tasks_valid_placement": {
+          "name": "tasks_valid_placement",
+          "value": "\"tasks\".\"placement\" IN ('todo', 'archive')"
+        }
+      }
+    },
+    "user_settings": {
+      "name": "user_settings",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "default_network_id": {
+          "name": "default_network_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_settings_owner_id_default_network_id_networks_owner_id_id_fk": {
+          "name": "user_settings_owner_id_default_network_id_networks_owner_id_id_fk",
+          "tableFrom": "user_settings",
+          "tableTo": "networks",
+          "columnsFrom": [
+            "owner_id",
+            "default_network_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

@@ -1,5 +1,27 @@
 {
   "version": "7",
   "dialect": "sqlite",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1793759871289,
+      "tag": "0000_marvelous_leo",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1793776671725,
+      "tag": "0001_wise_amphibian",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1793778121685,
+      "tag": "0002_slim_magneto",
+      "breakpoints": true
+    }
+  ]
 }
